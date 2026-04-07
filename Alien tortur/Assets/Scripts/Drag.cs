@@ -2,10 +2,12 @@ using UnityEngine;
 
 public class Drag : MonoBehaviour
 {
-
+    [SerializeField]
+    public Collider2D syringecollider;
+    public Collider2D slimecollider;
+    public GameObject slimey;
 
     GameObject objSelected = null;
-
     private Vector3 origin;
 
 
@@ -60,9 +62,26 @@ public class Drag : MonoBehaviour
 
     void DropObject()
     {
+        DropCheck();
         objSelected.transform.position = origin;
         objSelected = null;
 
     }
+
+    void DropCheck()
+    {
+        if (syringecollider.IsTouching(slimecollider))
+        {
+            print("HELLLOOOOOO HIIIII HHELOOOOo");
+            slimey.GetComponent<Torture>().VeryDangerousFunctionOfDeathPlaceholder();
+
+
+        }
+
+    }
+
+
+
+
 
 }
