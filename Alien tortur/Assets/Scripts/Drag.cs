@@ -1,4 +1,7 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.ParticleSystem;
 
 public class Drag : MonoBehaviour
 {
@@ -6,6 +9,9 @@ public class Drag : MonoBehaviour
     public Collider2D syringecollider;
     public Collider2D slimecollider;
     public GameObject slimey;
+    public Sprite beforeuse;
+    public Sprite afteruse;
+    public GameObject syringe;
 
     GameObject objSelected = null;
     private Vector3 origin;
@@ -63,21 +69,29 @@ public class Drag : MonoBehaviour
     void DropObject()
     {
         DropCheck();
+      
         objSelected.transform.position = origin;
         objSelected = null;
-
+        
     }
 
     void DropCheck()
     {
         if (syringecollider.IsTouching(slimecollider))
         {
-            print("HELLLOOOOOO HIIIII HHELOOOOo");
-            slimey.GetComponent<Torture>().VeryDangerousFunctionOfDeathPlaceholder();
 
+            print("Døds.");
+            slimey.GetComponent<Torture>().VeryDangerousFunctionOfDeathPlaceholder();
+            syringe.GetComponent<SpriteRenderer>().sprite = afteruse;
 
         }
+    }
 
+    IEnumerator Example()
+    {
+        
+        yield return new WaitForSeconds(3.2f);
+        
     }
 
 
