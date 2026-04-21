@@ -64,14 +64,12 @@ public class Drag : MonoBehaviour
     void DragObject()
     {
         objSelected.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane + 10.0f));
+        objSelected.transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 
     void DropObject()
     {
-        DropCheck();
-      
-        objSelected.transform.position = origin;
-        objSelected = null;
+        StartCoroutine(Example());
         
     }
 
@@ -89,9 +87,11 @@ public class Drag : MonoBehaviour
 
     IEnumerator Example()
     {
-        
-        yield return new WaitForSeconds(3.2f);
-        
+        DropCheck();
+        yield return new WaitForSeconds(1.0f);
+        objSelected.transform.position = origin;
+        objSelected.transform.rotation = Quaternion.Euler(0, 0, 90);
+        objSelected = null;
     }
 
 
