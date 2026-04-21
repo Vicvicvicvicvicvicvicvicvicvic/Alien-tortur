@@ -79,7 +79,6 @@ public class Drag : MonoBehaviour
         {
 
             print("Døds.");
-            slimey.GetComponent<Torture>().VeryDangerousFunctionOfDeathPlaceholder();
             syringe.GetComponent<SpriteRenderer>().sprite = afteruse;
 
         }
@@ -89,6 +88,7 @@ public class Drag : MonoBehaviour
     {
         DropCheck();
         yield return new WaitForSeconds(1.0f);
+        slimey.GetComponent<Torture>().VeryDangerousFunctionOfDeathPlaceholder();
         objSelected.transform.position = origin;
         objSelected.transform.rotation = Quaternion.Euler(0, 0, 90);
         objSelected = null;
