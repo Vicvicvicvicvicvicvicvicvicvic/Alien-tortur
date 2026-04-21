@@ -23,6 +23,13 @@ public class Drag : MonoBehaviour
         
     }
 
+
+    public void resettools()
+    {
+        syringe.GetComponent<SpriteRenderer>().sprite = beforeuse;
+    }
+
+
     // Update is called once per frame
     void Update()
     {
@@ -90,7 +97,7 @@ public class Drag : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         slimey.GetComponent<Torture>().VeryDangerousFunctionOfDeathPlaceholder();
         objSelected.transform.position = origin;
-        objSelected.transform.rotation = Quaternion.Euler(0, 0, 90);
+        objSelected.transform.rotation = Quaternion.Euler(0, 0, 70);
         objSelected = null;
     }
 

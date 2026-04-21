@@ -6,7 +6,7 @@ public class Torture : MonoBehaviour
     bool isdeads = false;
 
     public GameObject slime;
-
+    public GameObject dragscript;
     private Color alivecolor = Color.cyan;
     private Color deathColor = Color.red;
 
@@ -24,6 +24,7 @@ public class Torture : MonoBehaviour
             {
                 isdeads = false;
                 alivecolor = new Color(Random.Range(0F, 1F), Random.Range(0, 1F), Random.Range(0, 1F));
+                dragscript.GetComponent<Drag>().resettools();
                 GetComponent<SpriteRenderer>().color = alivecolor;
                 transform.position = new Vector3(-13.23f, -1.96f, 0);
             }
