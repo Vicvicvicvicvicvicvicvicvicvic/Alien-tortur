@@ -12,6 +12,8 @@ public class Drag : MonoBehaviour
     public Sprite beforeuse;
     public Sprite afteruse;
     public GameObject syringe;
+    private bool movingsres;
+    private bool canselect = true;
 
     GameObject objSelected = null;
     private Vector3 origin;
@@ -33,19 +35,24 @@ public class Drag : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        movingsres = slimey.GetComponent<Torture>().isMovingyesno;
+        if (canselect == true)
         {
-            CheckHitObject();
-            
+            if (Input.GetMouseButtonDown(0))
+            {
+                CheckHitObject();
+
+            }
+            if (Input.GetMouseButton(0) && objSelected != null)
+            {
+                DragObject();
+            }
+            if (Input.GetMouseButtonUp(0) && objSelected != null)
+            {
+                DropObject();
+            }
         }
-        if (Input.GetMouseButton(0) && objSelected != null)
-        {
-            DragObject();
-        }
-        if (Input.GetMouseButtonUp(0) && objSelected != null)
-        {
-            DropObject();
-        }
+
     }
 
 
@@ -87,18 +94,31 @@ public class Drag : MonoBehaviour
 
             print("Døds.");
             syringe.GetComponent<SpriteRenderer>().sprite = afteruse;
+            slimey.GetComponent<Torture>().VeryDangerousFunctionOfDeathPlaceholder();
 
         }
     }
 
     IEnumerator Example()
     {
-        DropCheck();
-        yield return new WaitForSeconds(1.0f);
-        slimey.GetComponent<Torture>().VeryDangerousFunctionOfDeathPlaceholder();
+        canselect = false;
+        if (movingsres ==true)
+        {
+
+        }
+        else
+        {
+
+            yield return new WaitForSeconds(0.5f);
+            DropCheck();
+
+
+        }
+        yield return new WaitForSeconds(0.5f);
         objSelected.transform.position = origin;
         objSelected.transform.rotation = Quaternion.Euler(0, 0, 70);
         objSelected = null;
+        canselect = true;
     }
 
 

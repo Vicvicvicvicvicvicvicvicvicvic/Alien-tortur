@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -8,7 +9,10 @@ public class Torture : MonoBehaviour
     public GameObject slime;
     public GameObject dragscript;
     private Color alivecolor = Color.cyan;
+    public Sprite beforeuse;
+    public Sprite afteruse;
     private Color deathColor = Color.red;
+    public bool isMovingyesno = false;
 
     private void Start()
     {
@@ -22,25 +26,40 @@ public class Torture : MonoBehaviour
             transform.position += new Vector3(0.03f, 0, 0);
             if (slime.transform.position.x > 12)
             {
+                slime.GetComponent<SpriteRenderer>().sprite = beforeuse;
                 isdeads = false;
-                alivecolor = new Color(Random.Range(0F, 1F), Random.Range(0, 1F), Random.Range(0, 1F));
                 dragscript.GetComponent<Drag>().resettools();
-                GetComponent<SpriteRenderer>().color = alivecolor;
                 transform.position = new Vector3(-13.23f, -1.96f, 0);
             }
         }
         //Når der kommer ny alien
-        if(slime.transform.position.x < -0.23f)
+        if (slime.transform.position.x < -0.23f)
         {
             transform.position += new Vector3(0.03f, 0, 0);
+            isMovingyesno = true;
         }
+        else if (slime.transform.position.x > -0.19f)
+        {
+            isMovingyesno = true;
+        }
+        else if (isdeads == true)
+        {
+            isMovingyesno = true;
+        }
+        else
+        {
+            isMovingyesno = false;
+        }
+
+            
+        
 
 
     }
 
     public void VeryDangerousFunctionOfDeathPlaceholder()
     {
-        GetComponent<SpriteRenderer>().color = deathColor;
+        GetComponent<SpriteRenderer>().sprite = afteruse;
 
         // Alien skal dø her hvis mulig.
         // Den kommer til at dø.
@@ -54,8 +73,9 @@ public class Torture : MonoBehaviour
 
     IEnumerator deadchecker()
     {
-        yield return new WaitForSeconds(1.0f);
         isdeads = true;
+        yield return new WaitForSeconds(1.0f);
+        
     }
 
 
