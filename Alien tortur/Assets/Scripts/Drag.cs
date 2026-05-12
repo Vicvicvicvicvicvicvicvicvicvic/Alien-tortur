@@ -9,9 +9,10 @@ public class Drag : MonoBehaviour
     public Collider2D syringecollider;
     public Collider2D slimecollider;
     public GameObject slimey;
-    public Sprite beforeuse;
-    public Sprite afteruse;
+    public Sprite beforeusesyringe;
+    public Sprite afterusesyringe;
     public GameObject syringe;
+    public GameObject scalpel;
     private bool movingsres;
     private bool canselect = true;
 
@@ -28,7 +29,7 @@ public class Drag : MonoBehaviour
 
     public void resettools()
     {
-        syringe.GetComponent<SpriteRenderer>().sprite = beforeuse;
+        syringe.GetComponent<SpriteRenderer>().sprite = beforeusesyringe;
     }
 
 
@@ -92,8 +93,8 @@ public class Drag : MonoBehaviour
         if (syringecollider.IsTouching(slimecollider))
         {
 
-            print("Døds.");
-            syringe.GetComponent<SpriteRenderer>().sprite = afteruse;
+            print("Dï¿½ds.");
+            syringe.GetComponent<SpriteRenderer>().sprite = afterusesyringe;
             slimey.GetComponent<Torture>().VeryDangerousFunctionOfDeathPlaceholder();
 
         }
